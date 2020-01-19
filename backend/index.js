@@ -1,6 +1,17 @@
 // Importação do Modulo Express
 const express = require( 'express' );
 
+const password = require( './password.json' );
+
+// Install Mongoose for MongoDb Connection
+const mongoose = require( 'mongoose' );
+
+mongoose.connect( `mongodb+srv://admin:${ password.mongoDb }@omnistack10-finq3.mongodb.net/test?retryWrites=true&w=majority`,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    } );
+
 //Constroi o App 
 const app = express();
 
