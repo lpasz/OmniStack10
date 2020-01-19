@@ -4,6 +4,10 @@ const express = require( 'express' );
 //Constroi o App 
 const app = express();
 
+// Now express understands json 
+app.use( express.json() );
+
+//#region Test Request 
 ///////////////////////////////
 //
 // Hello world  with Express
@@ -53,6 +57,7 @@ app.post( '/user', ( req, res ) =>
     e email é ${body.email }` )
     res.json(req.body)
 })
+//#endregion
 
 // principas metodos HTTP: GET, POST, PUT e DELETE
 
