@@ -1,16 +1,18 @@
 // Importação do Modulo Express
 const express = require( 'express' );
 
-const password = require( './password.json' );
+const password = require( './passwords.json' );
 
 // Install Mongoose for MongoDb Connection
 const mongoose = require( 'mongoose' );
 
-mongoose.connect( `mongodb+srv://admin:${ password.mongoDb }@omnistack10-finq3.mongodb.net/test?retryWrites=true&w=majority`,
+// Connection string and option for MongoDB Atlas
+mongoose.connect( `mongodb+srv://${password.mongoDb.user}:${ password.mongoDb.password }@omnistack10-finq3.mongodb.net/test?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    } );
+    }
+);
 
 //Constroi o App 
 const app = express();
@@ -28,9 +30,9 @@ app.get( '/', ( request, response ) =>
 {
     // retorna uma resposta em Texto
     //return response.send( 'Eai meu Parceria !' );
-    
+
     // Retorna uma resposta json
-    return response.json( { 'Hello' : 'World!'} );
+    return response.json( { 'Hello': 'World!' } );
 } )
 
 
@@ -54,7 +56,7 @@ app.get( '/user', ( request, response ) =>
 app.delete( '/user/:id', ( req, res ) =>
 {
     console.log( req.params.id )
-    res.send(req.params.id)
+    res.send( req.params.id )
 } )
 
 /////////////////////////////////////
@@ -66,8 +68,8 @@ app.post( '/user', ( req, res ) =>
     const body = req.body;
     console.log( `Meu nome é ${ body.name } 
     e email é ${body.email }` )
-    res.json(req.body)
-})
+    res.json( req.body )
+} )
 //#endregion
 
 // principas metodos HTTP: GET, POST, PUT e DELETE
