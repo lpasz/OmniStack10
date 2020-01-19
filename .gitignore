@@ -104,3 +104,4 @@ dist
 .tern-port
 backend/password.json
 /backend/passwords.json
+/backend/src/passwords.json
