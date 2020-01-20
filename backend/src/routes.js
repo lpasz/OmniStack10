@@ -12,12 +12,14 @@ routes.post( '/devs', async ( req, res ) =>
     
     github_api_res = await axios.default.get( `https://api.github.com/users/${ github_user }` );
 
-    console.log(github_api_res.data)
-    const { login , avatar_url, url, bio } = github_api_res.data;
+    console.log( github_api_res.data ) 
+    // Não funciona o 'name = login' pois o valor não é undefined e sim null
+    const { name, login , avatar_url, url, bio } = github_api_res.data;
     
+    const name_login = (!name) ? login : name;
 
-    console.log(login, avatar_url, url, bio, String(techs).split(','));
-    res.json( { login, avatar_url, url, bio } )
+    console.log(name_login, avatar_url, url, bio, String(techs).split(','));
+    res.json( { name_login, avatar_url, url, bio } )
     
 }
 );
