@@ -1,59 +1,59 @@
 // Axios para chamadas as API's externas
-const axios = require('axios');
+const axios = require( 'axios' );
 
 // index, show, store, update , destroy
 
 // Importa o model do dev
-const Dev = require('../models/dev');
+const Dev = require( '../models/dev' );
 
-async function index_GetAllUsers(req, res) {
-    // Pega todos os devs dentro do banco de dados 
-    const devs = await Dev.find();
-    return res.json(devs);
-}
+// DRY
+const ParseStringToArray = require('../utils/parseStringToArray')
 
-async function store_CreateDev(req, res) {
-    const { github_user, techs, latitude, longitude } = req.body;
 
-    let dev = await Dev.findOne({ github_user });
+module.exports = {
+    async index_GetAllUsers( req, res )
+    {
+        // Pega todos os devs dentro do banco de dados 
+        const devs = await Dev.find();
+        return res.json( devs );
+    },
+    async store_CreateDev( req, res )
+    {
+        const { github_user, techs, latitude, longitude } = req.body;
 
-    if (!dev) {
-        github_api_res = await axios.default.get(`https://api.github.com/users/${github_user}`);
+        let dev = await Dev.findOne( { github_user } );
 
-        const { name, login, avatar_url, bio } = github_api_res.data;
+        if ( !dev )
+        {
+            github_api_res = await axios.default.get( `https://api.github.com/users/${ github_user }` );
 
-        // Não funciona o 'name = login' pois o valor não é undefined e sim null 
-        const name_login = (!name) ? login : name;
+            const { name, login, avatar_url, bio } = github_api_res.data;
 
-        //Location 
-        const location = {
-            type: 'Point',
-            coordinates: [longitude, latitude],
-        };
+            // Não funciona o 'name = login' pois o valor não é undefined e sim null 
+            const name_login = ( !name ) ? login : name;
 
-        // Remove espaços e joga todas as strings para UPPER para padronizar buscas no backend
-        const techArrays = String(techs).toUpperCase().split(",").map(str => str.trim().replace(/\s/g, ''));
+            //Location 
+            const location = {
+                type: 'Point',
+                coordinates: [ longitude, latitude ],
+            };
 
-        dev = await Dev.create(
-            {
-                // se o nome é diferent do JSON original é necessário passar para variavel 
-                name: name_login,
-                // se for igual é so passar (Short Sintax)
-                github_user,
-                bio,
-                avatar_url,
-                techs: techArrays,
-                location,
-            }
-        );
+            techArray = ParseStringToArray.Techs(techs)
 
+            dev = await Dev.create(
+                {
+                    // se o nome é diferent do JSON original é necessário passar para variavel 
+                    name: name_login,
+                    // se for igual é so passar (Short Sintax)
+                    github_user,
+                    bio,
+                    avatar_url,
+                    techs: techArray,
+                    location,
+                }
+            );
+
+        }
+        return res.json( dev )
     }
-
-
-    return res.json(dev)
-}
-
-module.exports = { 
-    store_CreateDev,
-    index_GetAllUsers,
 };
