@@ -9,7 +9,7 @@ const app = express();
 
 // Define as opções necessarias ao mongo db
 mongooseOption = {
-    //useCreateIndex: true,
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
@@ -32,7 +32,7 @@ else
 // Habilita o express a entender json e sempre deve estar antes das
 app.use( express.json() );
 // Importa o module de rotas
-const routes = require( './routes.js' );
+const routes = require( './routes' );
 // Habilita as rotas importadas no express
 app.use( routes );
 // Porta utilizada é a 3333
