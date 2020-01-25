@@ -7,17 +7,20 @@ const mongoose = require( 'mongoose' );
 //Constroi o App 
 const app = express();
 
-// Define qual database vai ser usado
-is_local_database = true;
 // Define as opções necessarias ao mongo db
 mongooseOption = {
+    //useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
 
+// Define qual database vai ser usado
+is_local_database = true;
+
 // If is local, get local data base, else online data base
 if ( is_local_database )
 {
+    // localhost 
     mongoose.connect( 'mongodb://localhost:27017/Omnistack10', mongooseOption )
 }
 else

@@ -12,6 +12,8 @@ routes.get( '/devs', DevController.index_GetAllUsers );
 
 //  Controller de busca de devs
 const SearchController = require( './controllers/SearchController' )
+
+// Rota de busca de devs - com filtros 
 routes.get( '/search', SearchController.SearchUsers_index );
 
 module.exports = routes; 
