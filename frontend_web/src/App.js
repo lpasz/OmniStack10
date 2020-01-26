@@ -1,30 +1,147 @@
 import React from 'react';
-import Header from './Header';
-import { useState } from 'react';
-
-// Componente: (Ex: App) Bloco isolado de HTML, CSS JS, o qual não interfere no restante da aplicação
-// Propriedade: São os atributos do HTML || Informações que o componente pai passa para o filho
-// Estado: informação manipulada por componentes, pois o react não monitora a alteração de varaiveis (Lembrar: imutabilidade)
+import './global.css';
+import './App.css';
+import './Sidebar.css';
+import './Main.css';
 
 function App()
 {
-  const [counter, setCounter] = useState(0)
-
-  function incrementCounter()
-  {
-    console.log('click')
-    setCounter( counter + 1 );
-  }
 
   return (
-    // fragment open
-    <>
-      <Header title="Titulo 01" />
-      <Header title="Titulo 02" />
-      <Header title="Titulo 03" />
-      <h2>Contador: {counter}</h2>
-      <button onClick={incrementCounter}>Incrementa Contador</button>
-    </>
+    <div className="App">
+      <aside>
+        <strong>Register</strong>
+        <form>
+          <div className="input-block">
+            <label htmlFor="github_username">Git Hub User</label>
+            <input name="github_username" id="github_username" required />
+          </div>
+          <div className="input-block">
+
+            <label htmlFor="user_techs">Techs</label>
+            <input name="user_techs" id="user_techs" required />
+          </div>
+          <div className="input-group">
+            <div className="input-block">
+              <label htmlFor="latitude">Latitude</label>
+              <input name="latitude" id="latitude" required />
+            </div>
+            <div className="input-block">
+              <label htmlFor="longitude">Longitude</label>
+              <input name="longitude" id="longitude" required />
+            </div>
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </aside>
+      <main>
+        <ul>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
+              <div className="userInfo">
+                <strong>
+                  Lucas Paszinski
+                </strong>
+                <span>
+                  ReactJs, C#, Python
+                </span>
+              </div>
+            </header>
+            <p>
+              CTO. Na VASP
+            </p>
+            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
+              <div className="userInfo">
+                <strong>
+                  Lucas Paszinski
+                </strong>
+                <span>
+                  ReactJs, C#, Python
+                </span>
+              </div>
+            </header>
+            <p>
+              CTO. Na VASP
+            </p>
+            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
+              <div className="userInfo">
+                <strong>
+                  Lucas Paszinski
+                </strong>
+                <span>
+                  ReactJs, C#, Python
+                </span>
+              </div>
+            </header>
+            <p>
+              CTO. Na VASP
+            </p>
+            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
+              <div className="userInfo">
+                <strong>
+                  Lucas Paszinski
+                </strong>
+                <span>
+                  ReactJs, C#, Python
+                </span>
+              </div>
+            </header>
+            <p>
+              CTO. Na VASP
+            </p>
+            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
+              <div className="userInfo">
+                <strong>
+                  Lucas Paszinski
+                </strong>
+                <span>
+                  ReactJs, C#, Python
+                </span>
+              </div>
+            </header>
+            <p>
+              CTO. Na VASP
+            </p>
+            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
+              <div className="userInfo">
+                <strong>
+                  Lucas Paszinski
+                </strong>
+                <span>
+                  ReactJs, C#, Python
+                </span>
+              </div>
+            </header>
+            <p>
+              CTO. Na VASP
+            </p>
+            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+          </li>
+        </ul>
+      </main>
+    </div>
   );
 }
 
