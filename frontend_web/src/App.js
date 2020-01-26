@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './global.css';
 import './App.css';
 import './Sidebar.css';
@@ -6,6 +6,29 @@ import './Main.css';
 
 function App()
 {
+
+  const [ latitude, setLatitude ] = useState( '' );
+  const [ longitude, setLongitude ] = useState( '' );
+
+
+  useEffect( () =>
+  {
+    navigator.geolocation.getCurrentPosition(
+      ( position ) =>
+      {        
+        const { latitude, longitude } = position.coords
+        setLatitude( latitude )
+        setLongitude( longitude )
+      },
+      ( err ) =>
+      {
+        console.log( err )
+      },
+      {
+        timeout: 30000,
+      }
+    );
+  }, [] )// Vazio pois sovai executar uma vez não tem dependencias
 
   return (
     <div className="App">
@@ -24,11 +47,11 @@ function App()
           <div className="input-group">
             <div className="input-block">
               <label htmlFor="latitude">Latitude</label>
-              <input name="latitude" id="latitude" required />
+              <input name="latitude" id="latitude" required defaultValue={latitude} />
             </div>
             <div className="input-block">
               <label htmlFor="longitude">Longitude</label>
-              <input name="longitude" id="longitude" required />
+              <input name="longitude" id="longitude" required defaultValue={longitude} />
             </div>
           </div>
 
