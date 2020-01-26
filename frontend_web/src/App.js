@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './Header';
+import { useState } from 'react';
 
-function App() {
+// Componente: (Ex: App) Bloco isolado de HTML, CSS JS, o qual não interfere no restante da aplicação
+// Propriedade: São os atributos do HTML || Informações que o componente pai passa para o filho
+// Estado: informação manipulada por componentes, pois o react não monitora a alteração de varaiveis (Lembrar: imutabilidade)
+
+function App()
+{
+  const [counter, setCounter] = useState(0)
+
+  function incrementCounter()
+  {
+    console.log('click')
+    setCounter( counter + 1 );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // fragment open
+    <>
+      <Header title="Titulo 01" />
+      <Header title="Titulo 02" />
+      <Header title="Titulo 03" />
+      <h2>Contador: {counter}</h2>
+      <button onClick={incrementCounter}>Incrementa Contador</button>
+    </>
   );
 }
 
