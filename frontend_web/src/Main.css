@@ -2,12 +2,14 @@ main {
 	flex: 1;
 }
 
+
 main ul {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 20px;
 	list-style: none;
 }
+
 
 li.dev-item {
 	background: #fff;
@@ -17,10 +19,22 @@ li.dev-item {
     border-radius: 2px;
 }
 
+.lightMode li {
+    color:rgb(255, 255, 255);
+	background: #fff;
+}
+
+.darkMode li {
+    color: rgb(41, 40, 40);
+	background: rgb(41, 40, 40);
+}
+
 li.dev-item header {
 }
 
 li.dev-item header img {
+    float: left;
+    margin-right: 20px;
 	width: 54px;
 	height: 54px;
 	border-radius: 50%;
@@ -34,6 +48,14 @@ li.dev-item header .userInfo {
 	display: block;
 	font-size: 16px;
 	line-height: 20px;
+}
+
+.darkMode strong {
+    color: white;
+}
+
+.lightMode strong {
+    color: rgb(0, 0, 0);
 }
 
 .userInfo span {
@@ -55,8 +77,14 @@ li.dev-item header .userInfo {
 	text-decoration: none;
 }
 
+.darkMode a {
+	color: rgb(137, 46, 211);
+	font-size: 14px;
+	text-decoration: none;
+}
+
 .dev-item a:hover {
-	color: rgb(117, 17, 199);
+	color: rgb(132, 30, 216);
 }
 
 @media(max-width: 650px){

@@ -11,14 +11,15 @@ function App()
   const [ latitude, setLatitude ] = useState( '' );
   const [ longitude, setLongitude ] = useState( '' );
 
-
   useEffect( () =>
   {
     document.body.classList.value='';
-    document.body.classList.add(`${( darkMode ) ? "darkMode" : "lightMode"}`);     
-    
+    document.body.classList.add(`${( darkMode ) ? "darkMode" : "lightMode"}`); 
+  },[darkMode])
 
-    navigator.geolocation.getCurrentPosition(
+  useEffect( () =>
+  {
+      navigator.geolocation.getCurrentPosition(
       ( position ) =>
       {        
         const { latitude, longitude } = position.coords
@@ -33,7 +34,7 @@ function App()
         timeout: 30000,
       }
     );
-  }, [darkMode] )// Vazio pois sovai executar uma vez não tem dependencias
+  }, [] )// Vazio pois sovai executar uma vez não tem dependencias
 
   return (
     <div className="App">
@@ -65,107 +66,107 @@ function App()
       </aside>
       <main>
         <ul>
-          <li className="dev-item">
+          <li className={`dev-item ${( darkMode ) ? "darkMode" : "lightMode"}`}>
             <header>
               <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className="userInfo">
-                <strong>
+              <div className={`userInfo ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+                <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`} className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   Lucas Paszinski
                 </strong>
-                <span>
+                <span className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   ReactJs, C#, Python
                 </span>
               </div>
             </header>
-            <p>
+            <p >
               CTO. Na VASP
             </p>
-            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+            <a className={`${( darkMode ) ? "darkMode" : "lightMode"}`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
           </li>
-          <li className="dev-item">
+          <li className={`dev-item ${( darkMode ) ? "darkMode" : "lightMode"}`}>
             <header>
               <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className="userInfo">
-                <strong>
+              <div className={`userInfo ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+                <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   Lucas Paszinski
                 </strong>
-                <span>
+                <span className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   ReactJs, C#, Python
                 </span>
               </div>
             </header>
-            <p>
+            <p >
               CTO. Na VASP
             </p>
-            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+            <a className={`${( darkMode ) ? "darkMode" : "lightMode"}`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
           </li>
-          <li className="dev-item">
+          <li className={`dev-item ${( darkMode ) ? "darkMode" : "lightMode"}`}>
             <header>
               <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className="userInfo">
-                <strong>
+              <div className={`userInfo ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+                <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   Lucas Paszinski
                 </strong>
-                <span>
+                <span className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   ReactJs, C#, Python
                 </span>
               </div>
             </header>
-            <p>
+            <p >
               CTO. Na VASP
             </p>
-            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+            <a className={`${( darkMode ) ? "darkMode" : "lightMode"}`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
           </li>
-          <li className="dev-item">
+          <li className={`dev-item ${( darkMode ) ? "darkMode" : "lightMode"}`}>
             <header>
               <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className="userInfo">
-                <strong>
+              <div className={`userInfo ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+                <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   Lucas Paszinski
                 </strong>
-                <span>
+                <span className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   ReactJs, C#, Python
                 </span>
               </div>
             </header>
-            <p>
+            <p >
               CTO. Na VASP
             </p>
-            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+            <a className={`${( darkMode ) ? "darkMode" : "lightMode"}`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
           </li>
-          <li className="dev-item">
+          <li className={`dev-item ${( darkMode ) ? "darkMode" : "lightMode"}`}>
             <header>
               <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className="userInfo">
-                <strong>
+              <div className={`userInfo ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+                <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   Lucas Paszinski
                 </strong>
-                <span>
+                <span className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   ReactJs, C#, Python
                 </span>
               </div>
             </header>
-            <p>
+            <p >
               CTO. Na VASP
             </p>
-            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+            <a className={`${( darkMode ) ? "darkMode" : "lightMode"}`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
           </li>
-          <li className="dev-item">
+          <li className={`dev-item ${( darkMode ) ? "darkMode" : "lightMode"}`}>
             <header>
               <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className="userInfo">
-                <strong>
+              <div className={`userInfo ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+                <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   Lucas Paszinski
                 </strong>
-                <span>
+                <span className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
                   ReactJs, C#, Python
                 </span>
               </div>
             </header>
-            <p>
+            <p className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
               CTO. Na VASP
             </p>
-            <a href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
+            <a className={`${( darkMode ) ? "darkMode" : "lightMode"}`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
           </li>
         </ul>
       </main>
