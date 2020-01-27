@@ -6,6 +6,7 @@ import './Main.css';
 
 function App()
 {
+  const [ darkMode, setDarkMode ] = useState( true ); 
 
   const [ latitude, setLatitude ] = useState( '' );
   const [ longitude, setLongitude ] = useState( '' );
@@ -13,6 +14,10 @@ function App()
 
   useEffect( () =>
   {
+    document.body.classList.value='';
+    document.body.classList.add(`${( darkMode ) ? "darkMode" : "lightMode"}`);     
+    
+
     navigator.geolocation.getCurrentPosition(
       ( position ) =>
       {        
@@ -28,34 +33,34 @@ function App()
         timeout: 30000,
       }
     );
-  }, [] )// Vazio pois sovai executar uma vez não tem dependencias
+  }, [darkMode] )// Vazio pois sovai executar uma vez não tem dependencias
 
   return (
     <div className="App">
-      <aside>
-        <strong>Register</strong>
+      <aside className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>
+        <strong className={`${( darkMode ) ? "darkMode" : "lightMode"}`}>Register</strong>
         <form>
-          <div className="input-block">
-            <label htmlFor="github_username">Git Hub User</label>
-            <input name="github_username" id="github_username" required />
+          <div className={`input-block  ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+            <label className={`${( darkMode ) ? "darkMode" : "lightMode"}`} htmlFor="github_username">Git Hub User</label>
+            <input className={`${( darkMode ) ? "darkMode" : "lightMode"}`} name="github_username" id="github_username" required />
           </div>
-          <div className="input-block">
+          <div className={`input-block  ${( darkMode ) ? "darkMode" : "lightMode"}`}>
 
-            <label htmlFor="user_techs">Techs</label>
-            <input name="user_techs" id="user_techs" required />
+            <label className={`${( darkMode ) ? "darkMode" : "lightMode"}`} htmlFor="user_techs">Techs</label>
+            <input className={`${( darkMode ) ? "darkMode" : "lightMode"}`} name="user_techs" id="user_techs" required />
           </div>
           <div className="input-group">
-            <div className="input-block">
-              <label htmlFor="latitude">Latitude</label>
-              <input name="latitude" id="latitude" required defaultValue={latitude} />
+            <div className={`input-block  ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+              <label className={`${( darkMode ) ? "darkMode" : "lightMode"}`} htmlFor="latitude">Latitude</label>
+              <input className={`${( darkMode ) ? "darkMode" : "lightMode"}`} name="latitude" id="latitude" required defaultValue={latitude} />
             </div>
-            <div className="input-block">
-              <label htmlFor="longitude">Longitude</label>
-              <input name="longitude" id="longitude" required defaultValue={longitude} />
+            <div className={`input-block  ${( darkMode ) ? "darkMode" : "lightMode"}`}>
+              <label className={`${( darkMode ) ? "darkMode" : "lightMode"}`} htmlFor="longitude">Longitude</label>
+              <input className={`${( darkMode ) ? "darkMode" : "lightMode"}`} name="longitude" id="longitude" required defaultValue={longitude} />
             </div>
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={() => { setDarkMode( !darkMode ) }}>Submit</button>
         </form>
       </aside>
       <main>
