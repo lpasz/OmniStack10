@@ -75,6 +75,7 @@ aside form .input-block input {
 	font-size: 14px;
 	font-weight: bold;
 	display: block;
+	padding-inline-start: 10px;
     border-radius: 3px;
 }
 
