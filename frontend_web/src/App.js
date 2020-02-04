@@ -135,7 +135,7 @@ function App()
                     {dev.name}
                   </strong>
                   <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                    {dev.techs}
+                    {dev.techs.join(", ")}
                   </span>
                 </div>
               </header>
