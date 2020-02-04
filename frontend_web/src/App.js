@@ -7,12 +7,23 @@ import api from './/services//api';
 
 function App()
 {
-  const [ darkMode, setDarkMode ] = useState( true );
+  var [ darkMode, setDarkMode ] = useState( true );
+  var [ devs, setDevs ] = useState( [] );
+  var [ github_user, setGitHubUser ] = useState( '' );
+  var [ techs, setTechs ] = useState( '' );
+  var [ latitude, setLatitude ] = useState( '' );
+  var [ longitude, setLongitude ] = useState( '' );
 
-  const [ github_user, setGitHubUser ] = useState( '' );
-  const [ techs, setTechs ] = useState( '' );
-  const [ latitude, setLatitude ] = useState( '' );
-  const [ longitude, setLongitude ] = useState( '' );
+  async function loadDevs()
+  {
+    const resp = await api.get( 'devs' )
+    setDevs( resp.data );
+  }
+
+  useEffect( () =>
+  {
+    loadDevs()
+  }, [] );
 
   useEffect( () =>
   {
@@ -37,18 +48,25 @@ function App()
         timeout: 30000,
       }
     );
-  }, [] )// Vazio pois sovai executar uma vez não tem dependencias
+  }, [] )
 
   async function handleAddUser( e )
   {
     e.preventDefault();
+    setDarkMode(!darkMode)
     const resp = await api.post( '/devs', {
       github_user,
       techs,
       latitude,
       longitude,
     } )
-    console.log(`response from server is ${resp.data}`)
+    console.log( `response from server is ${ resp.data }` )
+
+    github_user = '';
+    techs = '';
+    latitude = '';
+    longitude = '';
+    loadDevs()
   }
 
   return (
@@ -108,106 +126,25 @@ function App()
       </aside>
       <main>
         <ul>
-          <li className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  Lucas Paszinski
-                </strong>
-                <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  ReactJs, C#, Python
-                </span>
-              </div>
-            </header>
-            <p >
-              CTO. Na VASP
-            </p>
-            <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
-          </li>
-          <li className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  Lucas Paszinski
-                </strong>
-                <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  ReactJs, C#, Python
-                </span>
-              </div>
-            </header>
-            <p >CTO. Na VASP</p>
-            <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
-          </li>
-          <li className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  Lucas Paszinski
-                </strong>
-                <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  ReactJs, C#, Python
-                </span>
-              </div>
-            </header>
-            <p >
-              CTO. Na VASP
-            </p>
-            <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
-          </li>
-          <li className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  Lucas Paszinski
-                </strong>
-                <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  ReactJs, C#, Python
-                </span>
-              </div>
-            </header>
-            <p >
-              CTO. Na VASP
-            </p>
-            <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
-          </li>
-          <li className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  Lucas Paszinski
-                </strong>
-                <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  ReactJs, C#, Python
-                </span>
-              </div>
-            </header>
-            <p >
-              CTO. Na VASP
-            </p>
-            <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
-          </li>
-          <li className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/42593470?s=460&v=4" alt="LucasPaszinski" />
-              <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  Lucas Paszinski
-                </strong>
-                <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-                  ReactJs, C#, Python
-                </span>
-              </div>
-            </header>
-            <p className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
-              CTO. Na VASP
-            </p>
-            <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href="https://github.com/LucasPaszinski"> Click here to see my Profile</a>
-          </li>
+          {devs.map( dev => (
+            <li id={dev.github_user} className={`dev-item ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
+              <header>
+                <img src={dev.avatar_url} alt={dev.github_user} />
+                <div className={`userInfo ${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
+                  <strong className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
+                    {dev.name}
+                  </strong>
+                  <span className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`}>
+                    {dev.techs}
+                  </span>
+                </div>
+              </header>
+              <p >
+                {dev.bio}
+              </p>
+              <a className={`${ ( darkMode ) ? "darkMode" : "lightMode" }`} href={`https://github.com/${ dev.github_user }`}> Click here to see my Profile</a>
+            </li>
+          ) )}
         </ul>
       </main>
     </div>
