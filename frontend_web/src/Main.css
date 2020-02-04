@@ -2,7 +2,6 @@ main {
 	flex: 1;
 }
 
-
 main ul {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -10,22 +9,21 @@ main ul {
 	list-style: none;
 }
 
-
 li.dev-item {
 	background: #fff;
 	box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 2px;
 	padding: 30px;
-    border-radius: 2px;
+	border-radius: 2px;
 }
 
 .lightMode li {
-    color:rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 	background: #fff;
 }
 
 .darkMode li {
-    color: rgb(41, 40, 40);
+	color: rgb(41, 40, 40);
 	background: rgb(41, 40, 40);
 }
 
@@ -33,8 +31,8 @@ li.dev-item header {
 }
 
 li.dev-item header img {
-    float: left;
-    margin-right: 20px;
+	float: left;
+	margin-right: 20px;
 	width: 54px;
 	height: 54px;
 	border-radius: 50%;
@@ -51,11 +49,11 @@ li.dev-item header .userInfo {
 }
 
 .darkMode strong {
-    color: white;
+	color: white;
 }
 
 .lightMode strong {
-    color: rgb(0, 0, 0);
+	color: rgb(0, 0, 0);
 }
 
 .userInfo span {
@@ -87,8 +85,8 @@ li.dev-item header .userInfo {
 	color: rgb(132, 30, 216);
 }
 
-@media(max-width: 650px){
-    main ul{
-        grid-template-columns: 1fr;
-    }
-} 
+@media (max-width: 650px) {
+	main ul {
+		grid-template-columns: 1fr;
+	}
+}

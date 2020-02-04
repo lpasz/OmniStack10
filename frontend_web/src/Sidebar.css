@@ -1,16 +1,15 @@
-
-body.lightMode{
-    background: #fff;
-}
-
-body.darkMode{
-    background: rgb(17, 15, 24);
-}
-aside.lightMode{
+body.lightMode {
 	background: #fff;
 }
 
-aside.darkMode{
+body.darkMode {
+	background: rgb(17, 15, 24);
+}
+aside.lightMode {
+	background: #fff;
+}
+
+aside.darkMode {
 	background: rgb(36, 33, 39);
 }
 
@@ -46,12 +45,12 @@ aside form .input-block label {
 	margin-bottom: 5px;
 }
 
-aside form .lightMode label{
-    color:rgb(0, 0, 0)
+aside form .lightMode label {
+	color: rgb(0, 0, 0);
 }
 
-aside form .darkMode label{
-    color:rgb(255, 255, 255)
+aside form .darkMode label {
+	color: rgb(255, 255, 255);
 }
 
 aside form .input-block + .input-block {
@@ -76,21 +75,19 @@ aside form .input-block input {
 	font-weight: bold;
 	display: block;
 	padding-inline-start: 10px;
-    border-radius: 3px;
+	border-radius: 3px;
 }
 
-aside form .lightMode  input {
-    color: #666;
-    background-color: #eee;
-    border: 1px solid #eee;
-
+aside form .lightMode input {
+	color: #666;
+	background-color: #eee;
+	border: 1px solid #eee;
 }
 
-aside form .darkMode input  {
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
-    border: 1px solid rgb(37, 34, 34);
-
+aside form .darkMode input {
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0);
+	border: 1px solid rgb(37, 34, 34);
 }
 aside form button[type="submit"] {
 	width: 100%;
