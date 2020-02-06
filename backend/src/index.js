@@ -9,6 +9,8 @@ const app = express();
 // Enable cors
 const cors = require( 'cors' );
 
+const isLocalHost = false;
+
 // Define as opções necessarias ao mongo db
 mongooseOption = {
     useCreateIndex: true,
@@ -31,7 +33,7 @@ else
     mongoose.connect( `mongodb+srv://${ passwords.mongoDb.user }:${ passwords.mongoDb.password }@omnistack10-finq3.mongodb.net/test?retryWrites=true&w=majority`, mongooseOption );
 }
 
-app.use(cors({origin:"http://localhost:3000"})) 
+app.use(cors())//{origin:`http://${(isLocalHost)?"localhost":"192.168.0.111"}:3000`} 
 // Habilita o express a entender json e sempre deve estar antes das
 app.use( express.json() );
 // Importa o module de rotas
