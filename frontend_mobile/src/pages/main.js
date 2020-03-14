@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import MapView, { Marker, Callout } from 'react-native-maps'
 import { useEffect, useState } from 'react'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
@@ -9,6 +9,8 @@ function Main( { navigation } )
 {
 
     const [ currentRegion, setCurrentRegion ] = useState( null )
+
+    const [ techsInputAndButtonHeight, setTechsInputAndButtonHeight ] = useState( 20 )
 
     useEffect( () =>
     {
@@ -35,6 +37,17 @@ function Main( { navigation } )
         loadInitialPosition()
     }, [] )
 
+    Keyboard.addListener( "keyboardDidShow", ( e ) =>
+    {
+        const { height } = e.endCoordinates;
+        setTechsInputAndButtonHeight(height+20) 
+    } )
+
+    Keyboard.addListener( 'keyboardDidHide', ( e ) =>
+    {
+        setTechsInputAndButtonHeight(20) 
+    } )
+
     if ( !currentRegion )
     {
         return null;
@@ -57,19 +70,19 @@ function Main( { navigation } )
                     </Callout>
                 </Marker>
             </MapView>
-            <View style={styles.searchForm}>
+            <View style={[ styles.searchForm, { bottom: techsInputAndButtonHeight }]}>
                 <TextInput
                     style={styles.searchInputs}
-                    placeholder=" Buscar devs por Techs ..."
+                    placeholder="Buscar devs por Techs ..."
                     placeholderTextColor='#999'
                     autoCapitalize="words"
                     autoCorrect={false}
 
                 />
+                <TouchableOpacity style={styles.loadBtn}>
+                    <MaterialIcons name='my-location' size={20} color='# FFF' style={styles.icon} />
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.loadBtn}>
-                <MaterialIcons name='my-location' size={20} color='# FFF' />
-            </TouchableOpacity>
         </> )
 }
 
@@ -101,27 +114,38 @@ const styles = StyleSheet.create( {
         marginTop: 5
     },
     searchForm: {
-        position: 'absolute',
-        bottom: 20,
+        position: 'absolute',        
+        //paddingBottom:20,
         left: 20,
         right: 20,
         zIndex: 5,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent:'flex-end'
     },
     searchInputs: {
         flex: 1,
-        height: 20,
+        height: 50,
         backgroundColor: '#FFF',
         color: '#333',
         borderRadius: 25,
         paddingHorizontal: 20,
         fontSize: 16,
-        elevation: 2,
+        elevation: 5,
+        
     },
     loadBtn: {
         width: 50,
         height: 50,
-        backgroundColor: '#7D40E7'
+        backgroundColor: '#7D40E7',
+        borderRadius: 25,
+        elevation: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft:10,
+
+    },
+    icon: {
+        color: '#FFF'
     }
 
 } )
