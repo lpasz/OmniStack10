@@ -8,6 +8,7 @@ const Dev = require( '../models/dev' );
 
 // DRY
 const ParseStringToArray = require( '../utils/parseStringToArray' )
+const { findConnection, sendMessageToSocket } = require( '../socket' )
 
 
 module.exports = {
@@ -52,6 +53,9 @@ module.exports = {
                     location,
                 }
             );
+
+            const socketToNotify = findConnection( { latitude, longitude }, techArray )
+            sendMessageToSocket( socketToNotify, 'NewDevAdded', dev )
 
         }
         return res.json( dev )

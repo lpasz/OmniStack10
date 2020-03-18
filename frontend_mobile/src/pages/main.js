@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons'
 import api from '../services/api'
+import {connectSocket,disconnectSocket, subscribeToNewDevs} from '../services/socket'
 import DevMarker from '../components/DevMarker'
 
 /// Validar a busca antes de dar refresh nos devs (erro ao fazer isso com o input vazio)
@@ -20,6 +21,18 @@ function Main( { navigation } )
     const [ techs, setTechs ] = useState( '' )
     const [ techsInputAndButtonHeight, setTechsInputAndButtonHeight ] = useState( 20 )
 
+    function setupWebSocket()
+    {
+        disconnectSocket()
+        const { latitude, longitude } = currentRegion
+        connectSocket( {
+            latitude,
+            longitude,
+            techs
+        })
+        
+    }
+
     async function loadDevs()
     {
         const { latitude, longitude } = currentRegion
@@ -31,6 +44,7 @@ function Main( { navigation } )
             }
         } )
         setDevs( response.data )
+        setupWebSocket()
     }
 
     async function loadAllDevs()
@@ -66,6 +80,14 @@ function Main( { navigation } )
         loadAllDevs()
     }, [] )
 
+    useEffect( () =>
+    {
+        subscribeToNewDevs( dev =>
+        {
+            console.log("\n\n\Register new dev ... \n\n\n")
+            setDevs([ ...devs, dev ])
+        }) 
+    }, [devs])
     function handleRegionChanged( region )
     {
         setCurrentRegion( region )
@@ -89,170 +111,10 @@ function Main( { navigation } )
 
     return (
         <>
-            <MapView customMapStyle={[
-                {
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "color": "#242f3e"
-                        }
-                    ]
-                },
-                {
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#746855"
-                        }
-                    ]
-                },
-                {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                            "color": "#242f3e"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.locality",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#d59563"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#d59563"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "color": "#263c3f"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#6b9a76"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "color": "#38414e"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                            "color": "#212a37"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#9ca5b3"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "color": "#746855"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                            "color": "#1f2835"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#f3d19c"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "color": "#2f3948"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#d59563"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "color": "#17263c"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#515c6d"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                            "color": "#17263c"
-                        }
-                    ]
-                }
-            ]} loadingEnabled={true} mapType={"standard"} onRegionChangeComplete={handleRegionChanged}
+            <MapView  loadingEnabled={true} mapType={"standard"} onRegionChangeComplete={handleRegionChanged}
                 initialRegion={currentRegion}
                 style={styles.map}>
-                {devs.map( dev => ( <DevMarker key={dev.github_user} dev={dev} navigation={navigation} /> ) )}
+                {devs.map( dev => ( <DevMarker key={dev.__id} dev={dev} navigation={navigation} /> ) )}
             </MapView>
             <View style={[ styles.searchForm, { bottom: techsInputAndButtonHeight } ]}>
                 <TextInput
