@@ -1,15 +1,13 @@
 # Dev Radar
 
-## Found developer around you
-
-## on Web your self
-
-## on the mobile found others around you.
+## Found developer around you.
+## Register your self on Web
+## Find on the mobile app devs around you.
 
 # Screenshots
 
 ## Web Light Mode
-<img src='./README_FILES/light_mode.png.png'/>
+<img src='./README_FILES/light_mode.png'/>
 
 ## Web Dark Mode
 <img src='./README_FILES/dark_mode.png'/>
