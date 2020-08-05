@@ -9,8 +9,7 @@ import DevForm from './components/DevForm'
 
 function App()
 {
-  var [ darkMode, setDarkMode ] = useState( true );
-  setDarkMode( true )
+  var [ darkMode, setDarkMode ] = useState( false );
   
   var [ devs, setDevs ] = useState( [] );
 

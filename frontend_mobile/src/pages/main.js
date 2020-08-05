@@ -10,12 +10,12 @@ import DevMarker from '../components/DevMarker'
 
 /// Validar a busca antes de dar refresh nos devs (erro ao fazer isso com o input vazio)
 // Ver se existe algum modo escuro pro mapa, o google tem  (DONE WITH THE API GOOGLE)
-// Switch de esqeuma de cores no topo (PRA ficar TOP)
+// Switch de esquema de cores no topo (PRA ficar TOP)
 // Adicionar um tela de loading
 
 function Main( { navigation } )
 {
-
+    const [ darkMode, setdarkMode ] = useState( true )
     const [ currentRegion, setCurrentRegion ] = useState( null )
     const [ devs, setDevs ] = useState( [] )
     const [ techs, setTechs ] = useState( '' )
@@ -31,6 +31,178 @@ function Main( { navigation } )
             techs
         })
         
+    }
+
+    function getMapViewCustomMapStyle()
+    {
+        if ( darkMode )
+        {
+            return [
+                {
+                  "elementType": "geometry",
+                  "stylers": [
+                    {
+                      "color": "#242f3e"
+                    }
+                  ]
+                },
+                {
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#746855"
+                    }
+                  ]
+                },
+                {
+                  "elementType": "labels.text.stroke",
+                  "stylers": [
+                    {
+                      "color": "#242f3e"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "administrative.locality",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#d59563"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "poi",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#d59563"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "poi.park",
+                  "elementType": "geometry",
+                  "stylers": [
+                    {
+                      "color": "#263c3f"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "poi.park",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#6b9a76"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "road",
+                  "elementType": "geometry",
+                  "stylers": [
+                    {
+                      "color": "#38414e"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "road",
+                  "elementType": "geometry.stroke",
+                  "stylers": [
+                    {
+                      "color": "#212a37"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "road",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#9ca5b3"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "road.highway",
+                  "elementType": "geometry",
+                  "stylers": [
+                    {
+                      "color": "#746855"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "road.highway",
+                  "elementType": "geometry.stroke",
+                  "stylers": [
+                    {
+                      "color": "#1f2835"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "road.highway",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#f3d19c"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "transit",
+                  "elementType": "geometry",
+                  "stylers": [
+                    {
+                      "color": "#2f3948"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "transit.station",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#d59563"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "water",
+                  "elementType": "geometry",
+                  "stylers": [
+                    {
+                      "color": "#17263c"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "water",
+                  "elementType": "labels.text.fill",
+                  "stylers": [
+                    {
+                      "color": "#515c6d"
+                    }
+                  ]
+                },
+                {
+                  "featureType": "water",
+                  "elementType": "labels.text.stroke",
+                  "stylers": [
+                    {
+                      "color": "#17263c"
+                    }
+                  ]
+                }
+              ]              
+        }
+        else
+        {
+            return []
+        }
     }
 
     async function loadDevs()
@@ -111,7 +283,8 @@ function Main( { navigation } )
 
     return (
         <>
-            <MapView  loadingEnabled={true} mapType={"standard"} onRegionChangeComplete={handleRegionChanged}
+            <MapView loadingEnabled={true} mapType={"standard"} onRegionChangeComplete={handleRegionChanged}
+                customMapStyle={getMapViewCustomMapStyle()}
                 initialRegion={currentRegion}
                 style={styles.map}>
                 {devs.map( dev => ( <DevMarker key={dev.__id} dev={dev} navigation={navigation} /> ) )}
